@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\FreeRTOS_Test"
+		},
+		{
+			"name": "pr_8",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
