@@ -1,11 +1,16 @@
+// pinout
 #define temp_pin A2
 #define light_pin A1
+#define co2_pin A3
+
 #define buzzer_pin 5
 
 #define light_delay 2000
 #define beep_delay 3000
 #define temp_delay 1000
+#define co2_delay 5000
 
+#include <MQ135.h>
 #include <Wire.h>
 #include <Arduino.h>
 
@@ -106,15 +111,25 @@ void mensure_light()
   handle_light(current_light);
 }
 
+void mensure_carbon_dioxide()
+{
+  MQ135 gasSensor = MQ135(co2_pin); // Attach sensor to pin A5
+  Serial.print("Текущи значение углекислого газа: ");
+  float rzero = gasSensor.getRZero();
+  Serial.println(rzero);
+}
+
 void setup()
 {
   pinMode(temp_pin, INPUT);
+  // pinMode(co2_pin, INPUT); не нужно
   pinMode(buzzer_pin, OUTPUT);
   Serial.begin(9600);
 }
 
 long temp_millis = 0;
 long light_millis = 0;
+long co2_millis = 0;
 
 void loop()
 {
@@ -132,10 +147,16 @@ void loop()
       temp_millis = millis();
     }
 
-    else if (millis() - light_millis > light_delay)
+    if (millis() - light_millis > light_delay)
     {
       mensure_light();
       light_millis = millis();
+    }
+
+    if (millis() - co2_millis > co2_delay)
+    {
+      mensure_carbon_dioxide();
+      co2_millis = millis();
     }
     // beep();
     //

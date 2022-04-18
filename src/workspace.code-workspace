@@ -6,6 +6,10 @@
 		{
 			"name": "pr_8",
 			"path": ".."
+		},
+		{
+			"name": "IMPERIUM-DMX-1",
+			"path": "..\\..\\IMPERIUM-DMX-1"
 		}
 	],
 	"settings": {}
